@@ -8,6 +8,21 @@ The `react-native-oauth` library provides an interface to OAuth 1.0 and OAuth 2.
 * Github
 * Slack
 
+###Digital Dawn Changes
+When authorize_type request parameter is specified as "header" the "Authorization" header is added to the request with the token type followed by the token. Example:
+
+```$xslt
+{
+    headers: {
+        "Authorization": "Bearer ABCXYZ"
+    }
+}
+```
+
+When the authorize_type parameter is set, the token is not added to the request query string.
+
+** Note: This change has only been made on Android and still needs to be implemented on ios.
+
 ## TL;DR;
 
 This library cuts out the muck of dealing with the [OAuth 1.0](https://tools.ietf.org/html/rfc5849) and [OAuth 2.0](http://oauth.net/2/) protocols in react-native apps. The API is incredibly simple and straight-forward and is intended on getting you up and running quickly with OAuth providers (such as Facebook, Github, Twitter, etc).

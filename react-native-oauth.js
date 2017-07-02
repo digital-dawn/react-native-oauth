@@ -73,8 +73,6 @@ export default class OAuthManager {
       app_name: this.appName
     });
 
-    console.log('making request', provider, url, opts);
-
     return promisify('makeRequest')(provider, url, options)
       .then(response => {
         // Little bit of a hack to support Android until we have a better

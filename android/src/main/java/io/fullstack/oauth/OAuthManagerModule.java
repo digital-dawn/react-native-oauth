@@ -226,14 +226,18 @@ class OAuthManagerModule extends ReactContextBaseJavaModule {
           final OAuth10aService service = 
             OAuthManagerProviders.getApiFor10aProvider(providerName, cfg, requestParams, null);
           OAuth1AccessToken token = _credentialsStore.get(providerName, OAuth1AccessToken.class);
-          
+
           service.signRequest(token, request);
         } else if (authVersion.equals("2.0")) {
           final OAuth20Service service =
             OAuthManagerProviders.getApiFor20Provider(providerName, cfg, requestParams, null);
           OAuth2AccessToken token = _credentialsStore.get(providerName, OAuth2AccessToken.class);
 
-          service.signRequest(token, request);
+          if(params != null & params.hasKey("authorize_type") && params.getString("authorize_type").equalsIgnoreCase("header")) {
+            request.addHeader("Authorization", token.getTokenType() + " " + token.getAccessToken());
+          } else {
+            service.signRequest(token, request);
+          }
         } else {
           // Some kind of error here
           Log.e(TAG, "An error occurred");
