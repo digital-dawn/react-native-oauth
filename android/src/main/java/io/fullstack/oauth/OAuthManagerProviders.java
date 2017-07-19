@@ -134,7 +134,7 @@ public class OAuthManagerProviders {
     final String access_token,
     @Nullable final ReadableMap params
   ) {
-    if (params != null && params.hasKey("params")) {
+    if (params != null) {
       ReadableMapKeySetIterator iterator = params.keySetIterator();
       while (iterator.hasNextKey()) {
         String key = iterator.nextKey();
